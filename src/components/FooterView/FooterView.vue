@@ -45,7 +45,7 @@
           <h3 class="footer-title">关于我们</h3>
           <div class="qrcode-box">
             <tiny-image
-                :src="qrcodeSrc"
+                src="src/components/FooterView/qrcode.jpg"
                 :preview-src-list="[qrcodeSrc]"
                 fit="cover"
                 style="width:120px;height:120px"
@@ -70,17 +70,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import {Image as TinyImage} from '@opentiny/vue'
-
-const qrcodeSrc = ref('qrcode.png')//公众号二维码
+const qrcodeSrc = 'src/components/FooterView/qrcode.jpg'//二维码地址
 
 const links = [
   { name: '首页', path: '/' },
-  { name: '关于我们', path: '/about' },
-  { name: '新闻中心', path: '/news' },
-  { name: '成员风采', path: '/members' },
-  { name: '联系我们', path: '/contact' }
+  { name: '关于我们', path: '/' },
+  { name: '新闻中心', path: '/' },
+  { name: '成员风采', path: '/' },
+  { name: '联系我们', path: '/' }
 ]
 
 const links_1 = [
@@ -191,22 +189,4 @@ const links_1 = [
   font-size: 14px;
 }
 
-/* 响应式调整，可能用不到，暂时取消*/
-/*@media (max-width: 992px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-}
-
-@media (max-width: 576px) {
-  .footer-content {
-    width: 90%;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-}*/
 </style>

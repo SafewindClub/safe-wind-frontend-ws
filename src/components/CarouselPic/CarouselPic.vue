@@ -12,11 +12,11 @@ import { Carousel as TinyCarousel, CarouselItem as TinyCarouselItem } from '@ope
 import { ref } from "vue";
 
 const images = ref([
-  { url: '/images/back.jpg', alt: '图片1' },
+  { url: '/images/back.jpg', alt: '图片1' },//临时图片，等到有素材后更换
   { url: '/images/back1.jpg', alt: '图片2' },
   { url: '/images/back2.jpg', alt: '图片3' }
 ])
-/* 暂时布局，正在考虑便携更换 */
+/* 暂时布局，正在考虑便携更换功能 */
 </script>
 
 <style scoped>
