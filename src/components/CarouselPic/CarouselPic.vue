@@ -16,7 +16,7 @@ const images = ref([
   { url: '/images/back1.jpg', alt: '图片2' },
   { url: '/images/back2.jpg', alt: '图片3' }
 ])
-/* 暂时布局，正在考虑便携更换功能 */
+
 </script>
 
 <style scoped>
