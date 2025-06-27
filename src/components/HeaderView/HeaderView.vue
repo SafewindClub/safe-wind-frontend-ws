@@ -1,149 +1,62 @@
 <template>
-  <header class="header-container">
-    <!-- 主容器占用80%空间 -->
-    <div class="header-content">
-      <!-- 左侧Logo和标题 -->
-      <div class="brand-area">
-        <router-link to="/" class="logo-link">
-          <img
-              src="/src/components/HeaderView/logo.png"
-              alt="网站Logo"
-              class="logo-image"
-          >
-          <h1 class="site-title">海风学社</h1>
-        </router-link>
+    <header>
+      <div class="nav-container">
+        <div class="logo">海风学社</div>
+        <nav>
+          <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">活动中心</a></li>
+            <li><a href="#">新闻动态</a></li>
+            <li><a href="#">海风墙</a></li>
+            <li><a href="#">部门介绍</a></li>
+            <li><a href="#">加入我们</a></li>
+          </ul>
+        </nav>
       </div>
-
-      <!-- 右侧导航区 -->
-      <div class="nav-area">
-        <!-- 第一组导航 -->
-        <div class="nav-group">
-          <router-link
-              v-for="item in navGroup1"
-              :key="item.path"
-              :to="item.path"
-              class="nav-link"
-          >
-            {{ item.name }}
-          </router-link>
-        </div>
-
-        <!-- 分隔线 -->
-        <div class="divider"></div>
-
-        <!-- 第二组导航 -->
-        <div class="nav-group">
-          <router-link
-              v-for="item in navGroup2"
-              :key="item.path"
-              :to="item.path"
-              class="nav-link"
-          >
-            {{ item.name }}
-          </router-link>
-        </div>
-      </div>
-    </div>
-  </header>
+    </header>
 </template>
 
 <script setup>
 
-const navGroup1 = [
-  { name: '首页', path: '/' },
-  { name: '活动中心', path: '/' },
-  { name: '新闻动态', path: '/' },
-  { name: '学长学姐说', path: '/' }
-]
 
-const navGroup2 = [
-  { name: '部门介绍', path: '/' },
-  { name: '加入我们', path: '/' }
-]
 </script>
 
 <style scoped>
-/* 基础定位样式 */
-.header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-}
+    header {
+      width: 100%;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+    }
 
-/* 80%宽度内容区 */
-.header-content {
-  width: 80%;
-  max-width: 1200px;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .nav-container {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
 
-/* 左侧logo区 */
-.brand-area {
-  display: flex;
-  align-items: center;
-  min-width: 200px;
-}
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
 
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
 
-.logo-image {
-  height: 36px;
-  margin-right: 12px;
-}
+    nav ul li {
+      margin-left: 20px;
+    }
 
-.site-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-  white-space: nowrap;
-}
-
-/* 右侧导航区 */
-.nav-area {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-group {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.divider {
-  width: 1px;
-  height: 24px;
-  background: #e0e0e0;
-}
-
-.nav-link {
-  color: #555;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s;
-  white-space: nowrap;
-}
-
-.nav-link:hover {
-  color: #409EFF;
-  font-weight: 500;
-  cursor: pointer;
-}
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
 
 
 </style>
