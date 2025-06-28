@@ -3,17 +3,22 @@
       <template #header>
         <HeaderView />
       </template>
+
       <template #default class="main-content">
+
         <Banner
             title="海风学社"
             description="致力于推动科技创新和技术交流的学生组织"
         /><!-- 此处根据需要可以更改标题，背景，描述 -->
+
         <Activity
             :title="ActivityTitle"
             :activities="activities"
             @view-details="ActivityError"
         />
         <DepartIntroduction />
+
+      <template #footer>
         <FooterView />
       </template>
     </tiny-container>
@@ -23,8 +28,10 @@
 import HeaderView from '@/components/HeaderView/HeaderView.vue'
 import FooterView from '@/components/FooterView/FooterView.vue'
 import Banner from "@/components/Banner.vue";
+
 import Activity from "@/components/Activity.vue";
 import DepartIntroduction from "@/components/DepartIntroduction.vue";
+
 import { useHomeStore } from '@/stores/home'
 import {TinyContainer} from "@opentiny/vue";
 import activity from "@/components/Activity.vue";
@@ -75,7 +82,9 @@ const ActivityError=(activity)=>{
       box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
+
     .main-content {
       width: 100%;
     }
+
 </style>
