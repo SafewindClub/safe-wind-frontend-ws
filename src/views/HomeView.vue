@@ -31,6 +31,8 @@ import { useHomeStore } from '@/stores/home'
 import {TinyContainer} from "@opentiny/vue";
 import News from "@/components/News.vue";
 import SeaWall from "@/components/SeaWall.vue";
+import Activity from "@/components/Activity.vue";
+import DepartIntroduction from "@/components/DepartIntroduction.vue";
 import { onMounted,ref } from 'vue';
 import { useResponsive } from '@/composables/useResponsive';
 
