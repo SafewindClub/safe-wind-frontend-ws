@@ -1,0 +1,90 @@
+// 断点定义
+$breakpoints: (
+  xs: 480px,    // 超小屏幕
+  sm: 768px,    // 小屏幕
+  md: 1024px,   // 中等屏幕
+  lg: 1200px,   // 大屏幕
+  xl: 1440px    // 超大屏幕
+);
+
+// 媒体查询混入
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+// 设备类型混入
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// 通用响应式类
+.responsive-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+  @include mobile {
+    padding: 0 15px;
+  }
+}
+
+.responsive-grid {
+  display: grid;
+  gap: 20px;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// 字体响应式
+.responsive-text {
+  font-size: 16px;
+  
+  @include mobile {
+    font-size: 14px;
+  }
+  
+  @include desktop {
+    font-size: 18px;
+  }
+}
+
+.responsive-title {
+  font-size: 2rem;
+  
+  @include mobile {
+    font-size: 1.5rem;
+  }
+  
+  @include tablet {
+    font-size: 1.8rem;
+  }
+} 
