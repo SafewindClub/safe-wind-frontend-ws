@@ -1,6 +1,6 @@
 <template>
     <div>
-        加入我们
+        <h1>模块开发中</h1>
     </div>
 </template>
 
