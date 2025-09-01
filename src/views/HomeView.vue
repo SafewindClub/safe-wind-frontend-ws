@@ -38,6 +38,7 @@ import { useResponsive } from '@/composables/useResponsive';
 
 import { getRecentActivitiesApi, getAllActivityApi, getActivityByIdApi } from "@/api/activity";
 
+
 const { isMobile, isTablet, isDesktop } = useResponsive();
 
 let cardData=ref([]);

@@ -16,10 +16,10 @@
           
           <!-- 左右切换按钮 -->
           <button class="carousel-btn prev" @click="prevSlide" v-if="!isMobile">
-              <i class="fas fa-chevron-left"></i>
+              <i class="fas fa-chevron-left"><</i>
           </button>
           <button class="carousel-btn next" @click="nextSlide" v-if="!isMobile">
-              <i class="fas fa-chevron-right"></i>
+              <i class="fas fa-chevron-right">></i>
           </button>
       </div>
       

@@ -125,12 +125,9 @@ const getRecentActivities = async () => {
     try {
         const res = await getRecentActivitiesApi();
         if (res.success) {
-            // 过滤掉当前活动，取前5个作为最近活动
             const currentId = Number(route.params.id);
             const activities = res.data.filter(activity => activity.id !== currentId).slice(0, 5);
             recentActivities.value = activities;
-            
-            // 桌面端默认显示侧边栏，移动端默认隐藏
             showSidebar.value = !isMobile.value;
         }
     } catch (error) {
