@@ -17,6 +17,7 @@ import { useResponsive } from '@/composables/useResponsive';
 import HeaderView from '@/components/HeaderView/HeaderView.vue'
 import Barrage from '@/components/Barrage.vue'
 import FooterView from "@/components/FooterView/FooterView.vue";
+import {TinyContainer} from "@opentiny/vue";
 
 const { isMobile, isTablet, isDesktop } = useResponsive();
 </script>

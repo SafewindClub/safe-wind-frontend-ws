@@ -90,17 +90,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useResponsive } from '@/composables/useResponsive';
-import { getActivityByIdApi, getRecentActivitiesApi } from '@/api/activity';
+import {onMounted, ref} from 'vue';
+import {useRoute, useRouter} from 'vue-router';
+import {useResponsive} from '@/composables/useResponsive';
+import {getActivityByIdApi, getRecentActivitiesApi} from '@/api/activity';
 import HeaderView from '@/components/HeaderView/HeaderView.vue';
 import FooterView from "@/components/FooterView/FooterView.vue";
-import { TinyContainer } from "@opentiny/vue";
+import {TinyContainer} from "@opentiny/vue";
 
 const route = useRoute();
 const router = useRouter();
-const { isMobile, isTablet, isDesktop } = useResponsive();
+const { isMobile } = useResponsive();
 
 const activityDetail = ref(null);
 const recentActivities = ref([]);
@@ -125,12 +125,8 @@ const getRecentActivities = async () => {
     try {
         const res = await getRecentActivitiesApi();
         if (res.success) {
-            // 过滤掉当前活动，取前5个作为最近活动
             const currentId = Number(route.params.id);
-            const activities = res.data.filter(activity => activity.id !== currentId).slice(0, 5);
-            recentActivities.value = activities;
-            
-            // 桌面端默认显示侧边栏，移动端默认隐藏
+          recentActivities.value = res.data.filter(activity => activity.id !== currentId).slice(0, 5);
             showSidebar.value = !isMobile.value;
         }
     } catch (error) {
@@ -143,19 +139,14 @@ const toggleSidebar = () => {
 };
 
 const goBack = () => {
-    // 直接跳转到活动列表页面，不返回历史
     router.push('/activity');
 };
 
 const goToActivity = (activity) => {
-    // 判断是否为外链接
     if (activity.isLink === '1') {
-        // 外链接，在新窗口打开
         window.open(activity.externalLink, '_blank');
     } else {
-        // 内部链接，使用 replace 替换当前路由，不加入历史记录
         router.replace(`/activity/${activity.id}`);
-        // 移动端切换活动时隐藏侧边栏
         if (isMobile.value) {
             showSidebar.value = false;
         }
@@ -167,27 +158,17 @@ const formatDate = (dateString) => {
     const date = new Date(dateString);
     const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     const timeStr = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-    
-    // 移动端只显示日期，桌面端显示完整日期时间
     return isMobile.value ? dateStr : `${dateStr} ${timeStr}`;
 };
 
-// 监听路由参数变化，只在首次加载时获取数据
-let isInitialLoad = true;
+
 
 onMounted(() => {
     getActivityDetail();
     getRecentActivities();
-    isInitialLoad = false;
 });
 
-// 监听路由变化，但不重新获取数据
-watch(() => route.params.id, (newId, oldId) => {
-    if (newId !== oldId && !isInitialLoad) {
-        // 路由变化时，只更新当前活动ID，不重新获取数据
-        // 这里可以添加一些状态更新逻辑，比如高亮当前活动等
-    }
-});
+
 </script>
 
 <style lang="scss" scoped>
