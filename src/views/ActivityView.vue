@@ -87,14 +87,11 @@ const loading = ref(false);
 
 const totalPages = computed(() => Math.ceil(total.value / pageSize.value));
 
-// 根据设备类型调整每页显示数量
 const adjustPageSize = () => {
     if (isMobile.value) {
         pageSize.value = 4;
-    } else if (isTablet.value) {
-        pageSize.value = 6;
     } else {
-        pageSize.value = 9;
+        pageSize.value = 6;
     }
 };
 
@@ -121,16 +118,13 @@ const getActivityList = async () => {
 const changePage = (page) => {
     currentPage.value = page;
     getActivityList();
-    // 滚动到顶部
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 const handleActivityClick = (activity) => {
     if (activity.isLink === '1' && activity.externalLink) {
-        // 跳转到外链
         window.open(activity.externalLink, '_blank');
     } else {
-        // 跳转到活动详情页
         router.push(`/activity/${activity.id}`);
     }
 };
@@ -143,7 +137,6 @@ const formatDate = (dateString) => {
 
 const truncateContent = (content) => {
     if (!content) return '';
-    // 根据设备类型调整截取长度
     const maxLength = isMobile.value ? 60 : isTablet.value ? 80 : 100;
     return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
 };
@@ -252,8 +245,7 @@ onMounted(() => {
     display: grid;
     gap: 30px;
     margin-bottom: 40px;
-    
-    // 响应式网格布局
+
     @include mobile {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -263,15 +255,6 @@ onMounted(() => {
     @include tablet {
         grid-template-columns: repeat(2, 1fr);
         gap: 25px;
-    }
-    
-    @include desktop {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    // 超大屏幕显示4列
-    @media (min-width: 1400px) {
-        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -516,38 +499,4 @@ onMounted(() => {
     }
 }
 
-// 针对超小屏幕的特殊优化
-@media (max-width: 480px) {
-    .activity-card {
-        margin: 0 5px;
-    }
-    
-    .activity-grid {
-        margin: 0 -5px 30px;
-    }
-    
-    .header h1 {
-        font-size: 1.6rem;
-    }
-    
-    .header p {
-        font-size: 0.9rem;
-    }
-}
-
-// 横屏手机优化
-@media (max-width: 768px) and (orientation: landscape) {
-    .header {
-        padding: 15px 20px;
-        margin-bottom: 15px;
-    }
-    
-    .activity-image {
-        height: 160px;
-    }
-    
-    .activity-content {
-        padding: 12px;
-    }
-}
 </style>

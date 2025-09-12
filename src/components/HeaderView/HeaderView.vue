@@ -5,26 +5,26 @@
         <img src="./logo.png" alt="海风学社" class="logo-img" />
         <span class="logo-text">海风学社</span>
       </div>
-      
+
       <!-- 汉堡菜单 -->
       <div class="hamburger" :class="{ active: isMenuOpen }" @click="toggleMenu">
         <span></span>
         <span></span>
         <span></span>
       </div>
-      
+
       <!-- 导航菜单 -->
       <nav class="nav-responsive" :class="{ active: isMenuOpen }">
         <ul>
-          <li><a href="/" @click="closeMenu">首页</a></li>
-          <li><a href="/activity" @click="closeMenu">活动中心</a></li>
-          <li><a href="/news" @click="closeMenu">新闻动态</a></li>
-          <li><a href="/barrage" @click="closeMenu">海风墙</a></li>
-          <li><a href="/" @click="closeMenu">部门介绍</a></li>
-          <li><a href="/join" @click="closeMenu">加入我们</a></li>
+          <li><a href="/" @click="closeMenu" :class="{ active: currentRoute === '/' }">首页</a></li>
+          <li><a href="/activity" @click="closeMenu" :class="{ active: currentRoute === '/activity' }">活动中心</a></li>
+          <li><a href="/news" @click="closeMenu" :class="{ active: currentRoute === '/news' }">新闻动态</a></li>
+          <li><a href="/barrage" @click="closeMenu" :class="{ active: currentRoute === '/barrage' }">海风墙</a></li>
+          <li><a href="/department" @click="closeMenu" :class="{ active: currentRoute === '/department' }">部门介绍</a></li>
+          <li><a href="/join" @click="closeMenu" :class="{ active: currentRoute === '/join' }">加入我们</a></li>
         </ul>
       </nav>
-      
+
       <!-- 遮罩层 -->
       <div v-if="isMenuOpen" class="overlay" @click="closeMenu"></div>
     </div>
@@ -32,11 +32,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed} from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
 const isMenuOpen = ref(false);
+
+// 计算当前路由路径
+const currentRoute = computed(() => {
+  return route.path;
+});
 
 const goHome = () => {
   router.push('/');
@@ -102,20 +108,34 @@ nav ul {
 }
 
 nav ul li {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 nav ul li a {
   text-decoration: none;
   color: #333;
   font-size: 14px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   display: block;
-  padding: 5px 0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  position: relative;
 }
 
 nav ul li a:hover {
   color: #4facfe;
+}
+
+/* 当前激活菜单项的样式 */
+nav ul li a.active {
+  background-color: #4facfe;
+  color: white;
+  font-weight: bold;
+}
+
+nav ul li a.active:hover {
+  background-color: #3a9cea;
+  color: white;
 }
 
 .hamburger {
@@ -145,27 +165,27 @@ nav ul li a:hover {
     width: 32px;
     height: 32px;
   }
-  
+
   .logo-text {
     font-size: 18px;
   }
-  
+
   .hamburger {
     display: flex;
   }
-  
+
   .hamburger.active span:nth-child(1) {
     transform: rotate(-45deg) translate(-5px, 6px);
   }
-  
+
   .hamburger.active span:nth-child(2) {
     opacity: 0;
   }
-  
+
   .hamburger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
   }
-  
+
   nav {
     position: fixed;
     top: 0;
@@ -178,27 +198,35 @@ nav ul li a:hover {
     padding-top: 80px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   nav.active {
     left: 0;
   }
-  
+
   nav ul {
     flex-direction: column;
     padding: 20px;
   }
-  
+
   nav ul li {
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
-  
+
   nav ul li a {
     font-size: 16px;
-    padding: 15px 0;
+    padding: 12px 20px;
     border-bottom: 1px solid #f0f0f0;
   }
-  
+
+  /* 移动端激活菜单样式 */
+  nav ul li a.active {
+    background-color: #4facfe;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid #4facfe;
+  }
+
   .overlay {
     display: block;
     position: fixed;
@@ -216,13 +244,14 @@ nav ul li a:hover {
   .nav-container {
     width: 95%;
   }
-  
+
   nav ul li {
     margin-left: 15px;
   }
-  
+
   nav ul li a {
     font-size: 13px;
+    padding: 6px 12px;
   }
 }
 </style>
